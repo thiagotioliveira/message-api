@@ -1,0 +1,2 @@
+INSERT INTO message (id, content) VALUES ('8c1af2fc-b2b3-4c72-8906-0bc7ba594490', '#test - esta é uma mensagem enviada pelo bot.');
+--INSERT INTO scheduled_message (id, message_id, appointment_date_time, _to, status) VALUES ('b5c418c2-2ba4-11ed-a261-0242ac120002', '8c1af2fc-b2b3-4c72-8906-0bc7ba594490', '2022-09-03 18:59:00', '557799251068@c.us', 'PENDING');

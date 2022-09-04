@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>WhatsApp - Bot</title>
+  </head>
+  <body>
+  	<ul>
+  		<li th:each="contact: ${contacts}">
+  			<span th:text="${contact.name}"></span>
+  		</li>
+  	</ul>
+  </body>
+</html>

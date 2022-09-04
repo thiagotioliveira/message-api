@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <title>WhatsApp - Bot</title>
+  </head>
+  <body>
+    <h1>WhatsApp - Bot</h1>
+    <h2>Leia o QRCode</h2>
+    <p>Em caso de QRCode inválido, atualizer essa página.</p>
+    <img id="img"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.min.js"></script>
+    <!-- <script src="https://unpkg.com/form-data@4.0.0/lib/browser.js"></script> -->
+    <script>
+    	var socket = io('http://localhost:3101');
+    	socket.on('connection');
+    	
+    	socket.on('message', (data) => {
+    		document.querySelector('h1').innerHTML = 'Status: ' + data;
+    		//socket.emit('message');
+    		if(data = 'CONNECTED'){
+    			//document.querySelector('h2').style.display = 'none';
+    			//document.querySelector('p').style.display = 'none';
+    			//document.getElementById('img').style.display = 'none';
+    			socket.disconnect(true);
+    			window.location.href = '/contacts';
+    		}
+    	});
+    	
+    	socket.on('ready', (data) => {    		
+    		var client = new XMLHttpRequest();
+    		client.open('post', '/auth/qrcode', true);
+    		client.send(data); 
+    		
+    		client.onreadystatechange = function(){
+			   if (this.readyState === XMLHttpRequest.DONE && client.status === 200){
+			      console.log('qrcode sent with success.');
+			      document.getElementById('img').src = '/auth/qrcode/' + client.response;
+			   }
+			}
+    	});
+    	
+    	socket.emit('message');
+    	socket.emit('ready');
+    </script>
+  </body>
+</html>
